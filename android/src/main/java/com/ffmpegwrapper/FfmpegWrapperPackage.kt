@@ -5,29 +5,29 @@ import com.facebook.react.bridge.NativeModule
 import com.facebook.react.bridge.ReactApplicationContext
 import com.facebook.react.module.model.ReactModuleInfo
 import com.facebook.react.module.model.ReactModuleInfoProvider
-import java.util.HashMap
 
 class FfmpegWrapperPackage : BaseReactPackage() {
+
   override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? {
     return if (name == FfmpegWrapperModule.NAME) {
       FfmpegWrapperModule(reactContext)
-    } else {
-      null
-    }
+    } else null
   }
 
   override fun getReactModuleInfoProvider(): ReactModuleInfoProvider {
     return ReactModuleInfoProvider {
-      val moduleInfos: MutableMap<String, ReactModuleInfo> = HashMap()
-      moduleInfos[FfmpegWrapperModule.NAME] = ReactModuleInfo(
-        FfmpegWrapperModule.NAME,
-        FfmpegWrapperModule.NAME,
-        false,  // canOverrideExistingModule
-        false,  // needsEagerInit
-        false,  // isCxxModule
-        true // isTurboModule
+      mapOf(
+              FfmpegWrapperModule.NAME to
+                      ReactModuleInfo(
+                              /* name */ FfmpegWrapperModule.NAME,
+                              /* className */ FfmpegWrapperModule::class.java.name,
+                              /* canOverrideExistingModule */ false,
+                              /* needsEagerInit */ false,
+                              /* hasConstants */ false,
+                              /* isCxxModule */ false,
+                              /* isTurboModule */ true
+                      )
       )
-      moduleInfos
     }
   }
 }

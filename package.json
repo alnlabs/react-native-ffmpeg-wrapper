@@ -1,6 +1,6 @@
 {
   "name": "react-native-ffmpeg-wrapper",
-  "version": "0.7.7",
+  "version": "0.3.7",
   "description": "A lightweight and customizable React Native native module (Android-only) that wraps FFmpeg commands to process videos. Supports advanced video editing features like adding overlays (text/images), trimming, converting formats, extracting audio, and more — all using native FFmpeg capabilities.",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
