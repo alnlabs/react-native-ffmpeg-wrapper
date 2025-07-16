@@ -107,6 +107,13 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
@@ -116,4 +123,6 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+
+    implementation 'com.mrljdx:ffmpeg-kit-full:6.1.3'
 }

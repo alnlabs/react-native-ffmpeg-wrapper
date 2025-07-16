@@ -1,71 +1,81 @@
 # react-native-ffmpeg-wrapper
 
-A native Android-only React Native TurboModule that wraps FFmpeg operations using Kotlin and the Android NDK. This module serves as a foundation to build powerful FFmpeg-based features like video processing, trimming, overlays, compression, and more.
+A simple React Native wrapper for running FFmpeg commands on Android and iOS using native FFmpegKit.
 
-> ⚠️ Currently includes a test method `multiply(a, b)` for setup validation.
+## Features
 
----
+- Run any FFmpeg command from your React Native JS/TS code
+- Supports Android (iOS support requires native implementation)
+- Promise-based API
 
-## 📦 Installation
+## Installation
 
-```bash
+1. **Install the package**
+
+```sh
 npm install react-native-ffmpeg-wrapper
 # or
 yarn add react-native-ffmpeg-wrapper
 ```
 
----
+2. **Install FFmpegKit Native Dependency**
 
-## 🚀 Usage
+- For Android, add the following to your app's `android/app/build.gradle`:
+  (If using ffmpeg-kit-react-native, this is managed for you. If not, add the correct FFmpegKit dependency.)
 
-### Import
-
-```ts
-import { multiply } from 'react-native-ffmpeg-wrapper';
+```gradle
+implementation 'com.arthenica:ffmpeg-kit-full:6.0.2' # or the version matching your bridge
 ```
 
-### Example
+- For iOS, link the native module:
 
-```ts
-const result = multiply(5, 3);
-console.log('Multiplication Result:', result); // Output: 15
+```sh
+cd ios
+pod install
 ```
 
----
+3. **Link the Native Module**
 
-## 🧩 API
+If you are using React Native 0.60+, autolinking should work. Otherwise, link manually:
 
-### `multiply(a: number, b: number): number`
-
-Returns the result of multiplying two numbers.
-✅ Used for verifying native module setup.
-
----
-
-## ⚙️ Internals
-
-- ✅ Built as a **TurboModule**
-- ✅ Written in **Kotlin**
-- ✅ Android-only
-- ⚙️ Ready to be extended with native FFmpeg support
-
----
-
-## 🧪 Development
-
-```bash
-yarn install
-yarn build     # uses bob
-cd example
-yarn android   # run sample on Android
+```sh
+npx react-native link react-native-ffmpeg-wrapper
 ```
 
----
+## Usage
 
-## 📄 License
+```typescript
+import { runFFmpegCommand } from 'react-native-ffmpeg-wrapper';
+
+const command = '-i input.mp4 -vf scale=320:240 output.mp4';
+
+runFFmpegCommand(command)
+  .then(() => {
+    // Success
+  })
+  .catch((err) => {
+    // Handle error
+  });
+```
+
+## Example
+
+See the `example/` directory for a full React Native app demonstrating video recording, processing, and playback using this wrapper.
+
+## Troubleshooting
+
+- Make sure the correct FFmpegKit native library is included in your app's build.gradle (Android) or Podfile (iOS).
+- If you see errors about missing native modules, try cleaning your build and reinstalling pods:
+  ```sh
+  cd android && ./gradlew clean && cd ..
+  cd ios && pod install --repo-update && cd ..
+  ```
+- For iOS, ensure you have implemented the native bridge in `FfmpegWrapper.mm`.
+
+## License
 
 MIT
 
 ---
 
-> Made with ❤️ by ALN Labs using [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
+Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
