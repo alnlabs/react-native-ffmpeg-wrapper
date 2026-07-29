@@ -16,6 +16,10 @@ Pod::Spec.new do |s|
   s.source_files = "ios/**/*.{h,m,mm,cpp}"
   s.private_header_files = "ios/**/*.h"
 
+  # Official ffmpeg-kit CocoaPods packages were retired. Point your app Podfile at
+  # this package's ffmpeg-kit-ios-full.podspec (community mirror) so this resolves.
+  s.dependency "ffmpeg-kit-ios-full", "6.0"
 
   install_modules_dependencies(s)
 end
+

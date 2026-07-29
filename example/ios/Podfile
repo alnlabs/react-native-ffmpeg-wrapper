@@ -19,6 +19,9 @@ end
 target 'FfmpegWrapperExample' do
   config = use_native_modules!
 
+  # Community-hosted FFmpegKit (official CocoaPods binaries were removed).
+  pod 'ffmpeg-kit-ios-full', :podspec => '../../ffmpeg-kit-ios-full.podspec'
+
   use_react_native!(
     :path => config[:reactNativePath],
     # An absolute path to your application root.
